@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BookState {
+  AVAILABLE
+  LOANED
+  DAMAGED
+}
+
+model Member {
+  id        Int    @id @default(autoincrement())
+  member_id Int    @unique @default(autoincrement())
+  dni       String @unique
+  name      String
+
+  loans     Loan[]
+  fines     Fine[]
+  @@map("members")
+}
+
+model Book {
+  id     Int       @id @default(autoincrement())
+  isbn   String    @unique
+  title  String
+  author String
+  state  BookState @default(AVAILABLE)
+
+  loans  Loan[]
+  @@map("books")
+}
+
+model Loan {
+  id          Int      @id @default(autoincrement())
+  member_id   Int
+  book_isbn   String
+  start_date  DateTime @default(now())
+  return_date DateTime?
+
+  member Member @relation(fields: [member_id], references: [member_id], onDelete: Restrict, onUpdate: Cascade)
+  book   Book   @relation(fields: [book_isbn], references: [isbn], onDelete: Restrict, onUpdate: Cascade)
+
+  // Relación uno-a-uno con Fine (una multa por préstamo)
+  fine   Fine?
+
+  @@index([member_id])
+  @@index([book_isbn])
+  @@map("loans")
+}
+
+model Fine {
+  id         Int      @id @default(autoincrement())
+  member_id  Int
+  loan_id    Int     @unique
+  amount     Int     @default(0)
+  reason     String?
+  created_at DateTime @default(now())
+
+  member Member @relation(fields: [member_id], references: [member_id], onDelete: Restrict, onUpdate: Cascade)
+  loan   Loan   @relation(fields: [loan_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([member_id])
+  @@map("fines")
+}

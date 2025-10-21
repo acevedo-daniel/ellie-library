@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+body,
+html,
+* {
+  font-family: "Manrope", sans-serif;
+}
+
+/*
+  1. Definimos una paleta de colores simple en blanco y negro.
+     --color-primary se usará para los botones y elementos de acción principales.
+     --color-neutral-* nos da una escala de grises para textos, bordes y fondos secundarios.
+*/
+@theme {
+  --color-primary: #000000;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+}
+
+/*
+  2. Redefinimos los componentes base con el nuevo estilo.
+     - Botones con esquinas menos redondeadas y transiciones sutiles.
+     - Cards con bordes finos en lugar de sombras, un look más plano y moderno.
+     - Inputs limpios, con un foco distintivo pero minimalista.
+*/
+@layer components {
+  .btn {
+    @apply inline-flex h-10 items-center justify-center rounded-full px-6 font-semibold transition-all duration-300;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-neutral-800 active:bg-neutral-900;
+  }
+  .btn-secondary {
+    @apply bg-neutral-300 text-neutral-900 hover:bg-neutral-400 active:bg-neutral-500;
+  }
+  .btn-ghost {
+    @apply border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50 active:bg-neutral-100;
+  }
+  .card {
+    @apply rounded-xl border border-neutral-200 bg-white;
+  }
+  .input {
+    @apply h-10 w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-neutral-800;
+  }
+}

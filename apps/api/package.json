@@ -1,0 +1,30 @@
+{
+  "name": "@ellie-library/api",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "dotenv -e ../../.env -- tsx watch src/index.ts",
+    "build": "tsc -b",
+    "start": "node dist/index.js",
+    "migrate": "npm run prisma:migrate",
+    "generate": "npm run prisma:generate",
+    "prisma:migrate": "dotenv -e ../../.env -- prisma migrate dev --schema prisma/schema.prisma",
+    "prisma:generate": "dotenv -e ../../.env -- prisma generate --schema prisma/schema.prisma",
+    "prisma:studio": "dotenv -e ../../.env -- prisma studio --schema prisma/schema.prisma"
+  },
+  "type": "module",
+  "dependencies": {
+    "@ellie-library/contracts": "1.0.0",
+    "@prisma/client": "^6.17.1",
+    "express": "^5.1.0",
+    "prisma": "^6.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
+    "dotenv-cli": "^10.0.0",
+    "prisma": "^6.17.1",
+    "tsx": "^4.15.7"
+  }
+}

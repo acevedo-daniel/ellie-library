@@ -1,0 +1,24 @@
+{
+  "name": "ellie-library",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:api": "npm run dev -w @ellie-library/api",
+    "dev:web": "npm run dev -w @ellie-library/web",
+    "dev": "npm run dev:api & npm run dev:web",
+    "build": "npm run build -w @ellie-library/contracts && npm run build -w @ellie-library/api && npm run build -w @ellie-library/web",
+    "migrate": "npm run migrate -w @ellie-library/api"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@ellie-library/contracts",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "type": "module",
+  "dependencies": {
+    "zod": "^4.1.12",
+    "cors": "^2.8.5"
+  }
+}

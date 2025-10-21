@@ -1,0 +1,15 @@
+3. Patrón de Arquitectura de Diseño
+
+Patrón Seleccionado: Arquitectura en Capas
+Justificación: Se utiliza la arquitectura en capas para separar claramente la lógica de presentación (frontend React), la lógica de negocio (backend Express/Prisma) y la lógica de acceso a datos (Postgres). Esto facilita la mantenibilidad, escalabilidad y pruebas independientes de cada capa.
+
+4. Patrones de Diseño de Software
+
+Patrón Creacional: Singleton
+Aplicación: Se implementa para asegurar que la conexión a la base de datos (Prisma Client) sea única en toda la aplicación backend, evitando múltiples instancias y optimizando recursos.
+
+Patrón Estructural: Facade
+Aplicación: Se utiliza una fachada en el backend para simplificar la gestión de préstamos. Esta interfaz permite realizar operaciones complejas (verificar disponibilidad, cambiar estado del libro, registrar préstamo y multa) mediante una sola llamada desde el frontend.
+
+Patrón de Comportamiento: Strategy
+Aplicación: Se emplea el patrón Strategy para definir y seleccionar diferentes algoritmos de cálculo de multas. Por ejemplo, una estrategia para multas por retraso y otra para multas por daño del libro, permitiendo flexibilidad y extensión futura.
